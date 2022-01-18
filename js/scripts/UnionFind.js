@@ -29,3 +29,25 @@ class UnionFind {
 
 }//End of UnionFind
 
+class QuickUnion extends UnionFind{
+    constructor(size){
+        super(size);
+    }
+
+    find(id){
+        while(id != this.elements[id]){
+            id = this.elements[id];
+        }
+        return id;
+    }
+
+    union(idOfP, idOfQ){
+        let idOfP = this.find(idOfP);
+        let idOfQ = this.find(idOfQ);
+        if(idOfP == idOfQ) return;
+        this.elements[idOfP] = idOfQ;
+        this.count--;
+    }
+}//End of QuickUnion
+
+
