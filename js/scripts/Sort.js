@@ -42,3 +42,11 @@ class SelectionSort extends Sort{
     }
 }
 
+class InsertionSort extends Sort{
+    sort(array){
+        for(let i = 1; i < array.size(); i++){
+            for(let j = i; j > 0 && this.less(array[j],array[j-1]);j--)
+                this.exch(array,j,j-1);
+        }
+    }
+}
