@@ -16,7 +16,7 @@ class Sort {
     less(firstValue, secondValue) {
         return firstValue - secondValue < 0;
     }
-    
+
     show(array) {
         console.log(array);
     }
@@ -30,3 +30,15 @@ class Sort {
         return true;
     }
 }//End of Sort
+class SelectionSort extends Sort{
+    sort(array){        
+        for(let i in array){
+            let min = i;
+            for(let j = i + 1; j < array.size();j++)
+                if(this.less(array[j],array[min]))
+                    min = j;
+            this.exch(array,i,min)
+        }
+    }
+}
+
