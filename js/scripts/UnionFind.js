@@ -63,8 +63,41 @@ class QuickFind extends UnionFind{
         let idOfP = this.find(idOfP);
         let idOfQ = this.find(idOfQ);
         if(idOfP == idOfQ) return;
-        this.elements[idOfP] = idOfQ;
+        for(let i in elements){
+            if(this.elements[i] == idOfP)
+                this.elements[i] = idOfQ;
+        }
         this.count--;
     }
 }//End of QuickFind
 
+class WeightedQuickUnion extends UnionFind{
+    constructor(size){
+        super(size);
+        this.sz = new Array(size);
+        for(let i in this.sz){
+            this.sz[i] = 1;
+        }
+    }
+
+    find(id){
+        while(id != this.elements[id]){
+            id = this.elements[id];
+        }
+        return id;
+    }
+
+    union(idOfP, idOfQ){
+        let idOfP = this.find(idOfP);
+        let idOfQ = this.find(idOfQ);
+        if(idOfP == idOfQ) return;
+        if(this.sz[idOfP] < this.sz[idOfQ]){
+            this.elements[idOfP] = idOfQ;
+            this.sz[idOfQ] += this.sz[idOfP];
+        }else{
+            this.elements[idOfQ] = idOfP;
+            this.sz[idOfP] += this.sz[idOfQ];
+        }
+        this.count--;
+    }
+}//End of WeightedQuickUnion
