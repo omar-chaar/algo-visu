@@ -50,4 +50,21 @@ class QuickUnion extends UnionFind{
     }
 }//End of QuickUnion
 
+class QuickFind extends UnionFind{
+    constructor(size){
+        super(size);
+    }
+
+    find(id){
+        return this.elements[id];
+    }
+
+    union(idOfP, idOfQ){
+        let idOfP = this.find(idOfP);
+        let idOfQ = this.find(idOfQ);
+        if(idOfP == idOfQ) return;
+        this.elements[idOfP] = idOfQ;
+        this.count--;
+    }
+}//End of QuickFind
 
