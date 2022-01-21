@@ -66,7 +66,7 @@ class ShellSort extends Sort {
 				)
 					this.exch(array, j, j - gap);
 			}
-            gap /= 2;
+        gap /= 2;
 		}
 	}
 }
