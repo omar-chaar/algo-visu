@@ -1,10 +1,11 @@
 import sideMenu from "./template/menu.js";
+import {SelectionSort, InsertionSort, ShellSort} from "./scripts/Sort.js"
+
+//Functions loaded when page loads
 
 sideMenu()
 
-
 //Functions
-
 
 function createRandomArray(size){
     returnArray = new Array(size);

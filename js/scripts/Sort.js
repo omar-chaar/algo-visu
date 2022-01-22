@@ -30,7 +30,7 @@ class Sort {
 		return true;
 	}
 } //End of Sort
-class SelectionSort extends Sort {
+export class SelectionSort extends Sort {
 	sort(array) {
 		for (let i in array) {
 			let min = i;
@@ -42,7 +42,7 @@ class SelectionSort extends Sort {
 	}
 }
 
-class InsertionSort extends Sort {
+export class InsertionSort extends Sort {
 	sort(array) {
 		for (let i = 1; i < array.length; i++) {
 			for (let j = i; j > 0 && this.less(array[j], array[j - 1]); j--)
@@ -51,7 +51,7 @@ class InsertionSort extends Sort {
 	}
 }
 
-class ShellSort extends Sort {
+export class ShellSort extends Sort {
 	sort(array) {
 		let size = array.length;
 		let gap = 1;
