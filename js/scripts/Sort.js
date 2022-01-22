@@ -34,16 +34,17 @@ class SelectionSort extends Sort {
 	sort(array) {
 		for (let i in array) {
 			let min = i;
-			for (let j = i + 1; j < array.size(); j++)
+			for (let j = i + 1; j < array.length; j++)
 				if (this.less(array[j], array[min])) min = j;
 			this.exch(array, i, min);
+			 
 		}
 	}
 }
 
 class InsertionSort extends Sort {
 	sort(array) {
-		for (let i = 1; i < array.size(); i++) {
+		for (let i = 1; i < array.length; i++) {
 			for (let j = i; j > 0 && this.less(array[j], array[j - 1]); j--)
 				this.exch(array, j, j - 1);
 		}
@@ -52,7 +53,7 @@ class InsertionSort extends Sort {
 
 class ShellSort extends Sort {
 	sort(array) {
-		let size = array.size();
+		let size = array.length;
 		let gap = 1;
 		while (gap < size) {
 			gap = 3 * gap + 1;

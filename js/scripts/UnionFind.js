@@ -8,7 +8,7 @@ class UnionFind {
 		}
         this.count = size;
         this.elements = new Array(size);
-        for(let i =0; i < elements.size();i++)
+        for(let i =0; i < elements.length;i++)
             elements[i] = i;
 	}
 
