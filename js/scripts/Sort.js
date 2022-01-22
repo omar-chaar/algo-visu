@@ -71,3 +71,53 @@ class ShellSort extends Sort {
 		}
 	}
 }
+
+
+class MergeSort extends Sort {
+	//Merge
+	sort(array){
+		if(array.length <= 1)
+			return;
+		this.sort(array,0, array.length-1)
+	}
+	sort(array,left,right){
+		if(left >= right){
+			return;
+		}
+		let middle = left + parseInt((right-1)/2);
+		this.sort(array,left,middle);
+		this.sort(array, middle + 1, right);
+		this.merge(array,left,middle,right);
+	}
+	merge(array,left,middle,right){
+		let sizeLeftArray = middle - left + 1;
+		let sizeRightArray = right - middle;
+
+		let leftArray = new Array(sizeLeftArray);
+		let rightArray = new Array(sizeRightArray);
+
+		for(let i in leftArray){
+			leftArray[i] = array[left+i];
+		}
+		for(let i in rightArray){
+			rightArray[i] = array[middle+1+i];
+		}
+
+		let leftIndex = 0;
+		let rightIndex = 0;
+		let mergedIndex = left;
+		while(leftIndex < sizeLeftArray && rightIndex < sizeRightArray){
+			if(leftArray[leftIndex] <= rightArray[rightIndex]){
+				array[mergedIndex++] = leftArray[leftIndex++];
+			} else {
+				array[mergedIndex++] = rightArray[rightIndex++];
+			}
+		}
+		while(leftIndex < sizeLeftArray ){
+			array[mergedIndex++] = leftArray[leftIndex++];
+		}
+		while(rightIndex < sizeRightArray){
+			array[mergedIndex++] = rightArray[rightIndex++];
+		}
+	}
+}
