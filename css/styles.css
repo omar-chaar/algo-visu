@@ -95,6 +95,7 @@ main{
 
 .bar-container{
     height: 344px;
+    width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -110,7 +111,13 @@ main{
 }
 .bar{
     background-color: #333;
-    width: 100px;
+    width: 100%;
+}
+
+@media(max-width: 1220px){
+    #graph{
+        width: 800px;
+    }
 }
 
 @media(min-width: 850px){
@@ -137,6 +144,33 @@ main{
     }
     .logo{
         font-size: 1.2rem;
+    }
+    #graph{
+        width: 600px;
+    }
+}
+
+@media(max-width: 600px){
+    #graph{
+        width: 400px;
+    }
+}
+
+@media(max-width: 400px){
+    #graph{
+        width: 300px;
+    }
+    .bar-value{
+        font-size: 1rem;
+    }
+}
+
+@media(max-width: 300px){
+    #graph{
+        width: 250px;
+    }
+    .bar-value{
+        font-size: .7rem;
     }
 }
 
