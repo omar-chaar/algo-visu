@@ -84,7 +84,7 @@ a{
 @media(min-width: 550px){
     #mobile-nav{
         width: 50vw;
-    }
+    }    
 }
 
 @media(max-width: 850px){
@@ -96,6 +96,9 @@ a{
     }
     .nav-item{
         margin: 20px 0;
+    }
+    .logo{
+        font-size: 1.2rem;
     }
 }
 
