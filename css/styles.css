@@ -86,7 +86,7 @@ main{
     padding-top: 85px;
 }
 
-.graph{
+#graph{
     width: 1000px;
     height: 344px;
     display: flex;
@@ -111,46 +111,6 @@ main{
 .bar{
     background-color: #333;
     width: 100px;
-}
-
-#bar-1{
-    height: 10px;
-}
-
-#bar-2{
-    height: 150px;
-}
-
-#bar-3{
-   height: 220px; 
-}
-
-#bar-4{
-    height: 120px;
-}
-
-#bar-5{
-    height: 300px;
-}
-
-#bar-6{
-    height: 280px;
-}
-
-#bar-7{
-    height: 260px;
-}
-
-#bar-8{
-    height: 240px;
-}
-
-#bar-9{
-    height: 200px;
-}
-
-#bar-10{
-    height: 180px;
 }
 
 @media(min-width: 850px){
