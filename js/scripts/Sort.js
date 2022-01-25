@@ -74,7 +74,7 @@ export class ShellSort extends Sort {
 				)
 					this.exch(array, j, j - gap);
 			}
-			gap /= 2;
+			gap = parseInt(gap/3);
 		}
 	}
 }
