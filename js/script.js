@@ -33,6 +33,7 @@ sideMenu()
 //Toda vez que o usuário selecionar outro algoritmo essa função será invocada com um valor que corresponde ao algortimo
 function changePage(page) { //"page" é o valor correspondente ao algoritimo, de 0 à 3, ele será usado para selecionar as funções acima
     let title
+    setOpacity(page)
     emptyGraph() //Esvazia o gráfico para um novo array ser insertido
     switch (page) {
         case 0:
@@ -174,12 +175,34 @@ export function manipulateElements(i, j) {
     }, 1000)
 }
 
+function setOpacity(val){
+    for (let i = 0; i <= 3; i++) {
+        document.querySelector(`#link-${i + 1}`).style.opacity = val === i ? 0.5 : 1
+        document.querySelector(`#mob-link-${i + 1}`).style.opacity = val === i ? 0.5 : 1
+    }
+} //Seta opacidade da navbar no item escolhido
+
 //Essa função auto-invocada será executada quando a página iniciar
 (function () {
     changePage(0) //Por padrão o selection sort será exibido na tela
-    for (let i = 0; i <= 3; i++) { 
-        document.querySelector(`#link-${i+1}`).onclick = () => changePage(i)
-        document.querySelector(`#mob-link-${i+1}`).onclick = () => changePage(i)
-        //Esse for cria eventos para alterar os algortimos selecionando os elementos na página de acordo com o ID deles
+    const addEvents = (val) => {
+        for (let i = 0; i <= 3; i++) {
+            const link = document.querySelector(`#link-${i + 1}`)
+            const mobLink = document.querySelector(`#mob-link-${i + 1}`)
+            if (i !== val) {
+                link.addEventListener('click', ({ target }) => {
+                    addEvents(i)
+                    changePage(i)
+                }, { once: true })
+
+                mobLink.addEventListener('click', ({ target }) => {
+                    addEvents(i)
+                    changePage(i)
+                }, { once: true })
+            }
+            //Esse for cria eventos para alterar os algortimos selecionando os elementos na página de acordo com o ID deles
+        }
     }
+
+    addEvents()
 })()
