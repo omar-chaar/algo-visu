@@ -41,7 +41,7 @@ export class SelectionSort extends Sort {
 				for (let j = i + 1; j < array.length; j++)
 					if (this.less(array[j], array[min])) min = j;
 				this.exch(array, i, min);
-			}, 2000 * i)
+			}, 1500 * i)
 
 		}
 	}
@@ -50,8 +50,10 @@ export class SelectionSort extends Sort {
 export class InsertionSort extends Sort {
 	sort(array) {
 		for (let i = 1; i < array.length; i++) {
-			for (let j = i; j > 0 && this.less(array[j], array[j - 1]); j--)
+			setTimeout(() => {
+				for (let j = i; j > 0 && this.less(array[j], array[j - 1]); j--)
 				this.exch(array, j, j - 1);
+			}, i * 1500)
 		}
 	}
 }
@@ -78,7 +80,7 @@ export class ShellSort extends Sort {
 }
 
 
-class MergeSort extends Sort {
+export class MergeSort extends Sort {
 	//Merge
 	sort(array) {
 		let length = array.length;
