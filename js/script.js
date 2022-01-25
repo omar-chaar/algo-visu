@@ -114,6 +114,7 @@ function createPlayEvent(page, array) {
 }
 
 function createNewSortEvent(page) {
+    toggleButtons(false)
     const newSort = document.querySelector('#new-sort') //Seleciona o botão de novo sort
     newSort.addEventListener('click', () => { //Cria um evento no botão de new sort
         emptyGraph() //Esvazia o gráfico para receber o novo array
