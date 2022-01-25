@@ -34,6 +34,7 @@ sideMenu()
 function changePage(page) { //"page" é o valor correspondente ao algoritimo, de 0 à 3, ele será usado para selecionar as funções acima
     let title
     setOpacity(page)
+    toggleButtons(false)
     emptyGraph() //Esvazia o gráfico para um novo array ser insertido
     switch (page) {
         case 0:
@@ -106,7 +107,7 @@ function createPlayEvent(page, array) {
         }) //Aqui foi usado uma promise para esperar 15s até que o array seja reorganizado
 
         myPromise.then(() => {
-            toggleButtons(false) //Quando a promise retorna resolvida, significa que se passaram 15 minutos e os botões são re-ativados
+            toggleButtons(false, true) //Quando a promise retorna resolvida, significa que se passaram 15 minutos e os botões são re-ativados
         })
     }
     play.addEventListener('click', eventCallback) //Adiciona a função callback ao evento de click no botão
@@ -121,11 +122,11 @@ function createNewSortEvent(page) {
     })
 }
 
-function toggleButtons(state) {
+function toggleButtons(state, disablePlay = false) {
     const play = document.querySelector('#play')
     const newSort = document.querySelector('#new-sort')
 
-    play.disabled = state
+    if(!disablePlay) play.disabled = state //Habilita o play apenas quando o algoritmo estiver não ordenado
     newSort.disabled = state
     //Habilita / desabilita os botões de acordo com o parâmetro
 }
