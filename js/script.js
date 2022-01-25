@@ -1,72 +1,162 @@
 import sideMenu from "./template/menu.js";
-import {SelectionSort, InsertionSort, ShellSort} from "./scripts/Sort.js"
+import { SelectionSort, InsertionSort, ShellSort, MergeSort } from "./scripts/Sort.js"
+
+let eventCallback //Essa variável salva a função que dispara o evento para que ela possa ser removida através do método removeEventListener ()
+
+//Objeto com funções que invocam os algortimos, listados por numeros
+const sortingFunctions = {
+    0: function selectionSort(array) {
+        const sort = new SelectionSort(array.length)
+        sort.sort(array)
+    },
+    1: function insertionSort(array) {
+        const sort = new InsertionSort(array.length)
+
+        sort.sort(array)
+    },
+    2: function shellSort(array) {
+        const sort = new ShellSort(array.length)
+
+        sort.sort(array)
+    },
+    3: function mergeSort(array) {
+        const sort = new MergeSort(array.length)
+
+        sort.sort(array)
+    }
+}
 
 //Functions loaded when page loads
 
 sideMenu()
-let displayArray = createRandomArray(10);
 
-//Selecionando div dos gráficos
-const graph = document.querySelector('#graph')
+//Toda vez que o usuário selecionar outro algoritmo essa função será invocada com um valor que corresponde ao algortimo
+function changePage(page) { //"page" é o valor correspondente ao algoritimo, de 0 à 3, ele será usado para selecionar as funções acima
+    let title
+    emptyGraph() //Esvazia o gráfico para um novo array ser insertido
+    switch (page) {
+        case 0:
+            title = 'Selection Sorting'
+            break
+        case 1:
+            title = 'Insertion Sorting'
+            break
+        case 2:
+            title = 'Shell Sorting'
+            break
+        case 3:
+            title = 'Merge Sorting'
+            break
+    } //Switch seleciona o título do algortimo
 
-//Passando por cada um dos elementos do array gerado e gerando seus html
-displayArray.forEach((number, index) => {
-    //Criando elementos HTML barra e número que serão exibidos na página
-    const bar = document.createElement('div')
-    const value = document.createElement('p')
+    document.querySelector('#title').innerText = title //Insere o título
+    const array = createArrays() //Insere um novo array na tela e retorna os valores desse array
+    createPlayEvent(page, array) //Essa função cria um evento no botão, para quando clicar ele disparar o algortimo
+    createNewSortEvent(page) //Essa função cria um evento no botão para criar uma nova sequência aleatória de algortimo
+}
 
-    //Setando classes CSS e ID's para posterior manipulação dos elementos
-    bar.classList.add('bar')
-    bar.id = `bar-${index}`
-    value.classList.add('bar-value')
-    value.id = `value-${index}`
+function createArrays() {
+    let displayArray = createRandomArray(10);
+    //Selecionando div dos gráficos
+    const graph = document.querySelector('#graph')
 
-    bar.style.height = `${number * 10}px` //Setando altura do elemento de acordo com o número
-    value.innerText = number //Setando número que será exibido acima da barra
+    //Passando por cada um dos elementos do array gerado e gerando seus html
+    displayArray.forEach((number, index) => {
+        //Criando elementos HTML barra e número que serão exibidos na página
+        const bar = document.createElement('div')
+        const value = document.createElement('p')
+
+        //Setando classes CSS e ID's para posterior manipulação dos elementos
+        bar.classList.add('bar')
+        bar.id = `bar-${index}`
+        value.classList.add('bar-value')
+        value.id = `value-${index}`
+
+        bar.style.height = `${number * 10}px` //Setando altura do elemento de acordo com o número
+        value.innerText = number //Setando número que será exibido acima da barra
 
 
-    //Criando div pai dos elementos e adicionando elementos dentro dela
-    const barContainer = document.createElement('div')
-    barContainer.classList.add('bar-container')
-    barContainer.appendChild(value)
-    barContainer.appendChild(bar)
+        //Criando div pai dos elementos e adicionando elementos dentro dela
+        const barContainer = document.createElement('div')
+        barContainer.classList.add('bar-container')
+        barContainer.appendChild(value)
+        barContainer.appendChild(bar)
 
-    graph.appendChild(barContainer) //Adicionando elementos dentro da div dos gráficos
-})
+        graph.appendChild(barContainer) //Adicionando elementos dentro da div dos gráficos
+    })
 
-const sort = new SelectionSort(displayArray.length)
+    return displayArray
+}
 
-sort.sort(displayArray)
+function emptyGraph() {
+    document.querySelector('#graph').innerHTML = '' //Esvazia o HTML do gráfico
+}
 
+function createPlayEvent(page, array) {
+    const play = document.querySelector('#play') //Seleciona botão play
+    play.removeEventListener('click', eventCallback) //Caso haja um evento anterior, ele remove esse evento para criar um novo evento com o novo array
+    eventCallback = () => { //Atribui a função callback a variável eventCallBack
+        toggleButtons(true) //Desabilita os botões
+        const myPromise = new Promise((resolve, reject) => {
+            sortingFunctions[page](array) //Selecionamos a função através do index que corresponde a ela (page) e passamos o array como parametro
+            setTimeout(() => {
+                resolve()
+            }, 15000)
+        }) //Aqui foi usado uma promise para esperar 15s até que o array seja reorganizado
+
+        myPromise.then(() => {
+            toggleButtons(false) //Quando a promise retorna resolvida, significa que se passaram 15 minutos e os botões são re-ativados
+        })
+    }
+    play.addEventListener('click', eventCallback) //Adiciona a função callback ao evento de click no botão
+}
+
+function createNewSortEvent(page) {
+    const newSort = document.querySelector('#new-sort') //Seleciona o botão de novo sort
+    newSort.addEventListener('click', () => { //Cria um evento no botão de new sort
+        emptyGraph() //Esvazia o gráfico para receber o novo array
+        const array = createArrays() //Cria um novo array na tela e recebe seus valores
+        createPlayEvent(page, array) //Cria um novo evento de play que corresponde ao novo array
+    })
+}
+
+function toggleButtons(state) {
+    const play = document.querySelector('#play')
+    const newSort = document.querySelector('#new-sort')
+
+    play.disabled = state
+    newSort.disabled = state
+    //Habilita / desabilita os botões de acordo com o parâmetro
+}
 
 //Functions
 
-function createRandomArray(size){
+function createRandomArray(size) {
     let returnArray = new Array(size);
-    for(let i = 0; i < returnArray.length; i++){
+    for (let i = 0; i < returnArray.length; i++) {
         let randomNumber = parseInt(1 + Math.random() * 30);
-        while(returnArray.includes(randomNumber)){
+        while (returnArray.includes(randomNumber)) {
             randomNumber = parseInt(1 + Math.random() * 30);
         }
-        returnArray[i] = randomNumber;       
+        returnArray[i] = randomNumber;
     }
     return returnArray;
-}      
+}
 
-export function manipulateElements(i, j){
+export function manipulateElements(i, j) {
     //Seleciona barras e valores
     const firstBar = document.querySelector(`#bar-${i}`)
     const secondBar = document.querySelector(`#bar-${j}`)
 
     const firstValue = document.querySelector(`#value-${i}`)
     const secondValue = document.querySelector(`#value-${j}`)
-    
+
     //Altera o valor de ambos as barras para se destacar
     firstBar.style.backgroundColor = 'red'
     secondBar.style.backgroundColor = 'blue'
 
     setTimeout(() => {
-        //Após 1,5 segundos, o valor de ambos os elementos são coletados
+        //Após 1 segundo, o valor de ambos os elementos são coletados
         const value1 = parseInt(firstValue.innerHTML)
         const value2 = parseInt(secondValue.innerHTML)
 
@@ -81,6 +171,15 @@ export function manipulateElements(i, j){
         //Cores são setadas de volta ao normal
         firstBar.style.backgroundColor = '#333'
         secondBar.style.backgroundColor = '#333'
-    }, 1500)
+    }, 1000)
 }
 
+//Essa função auto-invocada será executada quando a página iniciar
+(function () {
+    changePage(0) //Por padrão o selection sort será exibido na tela
+    for (let i = 0; i <= 3; i++) { 
+        document.querySelector(`#link-${i+1}`).onclick = () => changePage(i)
+        document.querySelector(`#mob-link-${i+1}`).onclick = () => changePage(i)
+        //Esse for cria eventos para alterar os algortimos selecionando os elementos na página de acordo com o ID deles
+    }
+})()

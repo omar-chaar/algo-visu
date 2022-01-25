@@ -17,13 +17,13 @@
 <body>
     <header>
         <nav id='desktop-nav'>
-            <a href='/'>
+            <span>
                 <h1 class="logo nav-item">Algorithm Visualizer</h1>
-            </a>
-            <a href='/' class="nav-item desktop-item">Selection Sort</a>
-            <a href='/' class="nav-item desktop-item">Insertion Sort</a>
-            <a href='/' class="nav-item desktop-item">Shell Sort</a>
-            <a href='/' class="nav-item desktop-item">Merge Sort</a>
+            </span>
+            <span id="link-1" class="nav-item desktop-item">Selection Sort</span>
+            <span id="link-2" class="nav-item desktop-item">Insertion Sort</span>
+            <span id="link-3" class="nav-item desktop-item">Shell Sort</span>
+            <span id="link-4" class="nav-item desktop-item">Merge Sort</span>
             <span id='hamburger'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#333" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -37,14 +37,23 @@
                     <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
                   </svg>
             </span>
-            <a href='/' class="nav-item">Selection Sort</a>
-            <a href='/' class="nav-item">Insertion Sort</a>
-            <a href='/' class="nav-item">Shell Sort</a>
-            <a href='/' class="nav-item">Merge Sort</a>
-        </nav>
+            <span id="mob-link-1" class="nav-item">Selection Sort</span>
+            <span id="mob-link-2" class="nav-item">Insertion Sort</span>
+            <span id="mob-link-3" class="nav-item">Shell Sort</span>
+            <span id="mob-link-4" class="nav-item">Merge Sort</span>
+     </nav>
     </header>
     <main>
+        <h1 id='title'>Selection Sorting</h1>
         <div id='graph'>
+        </div>
+        <div class='button-container'>
+            <button id='play' class='button'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#333" viewBox="0 0 16 16">
+                    <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                  </svg>
+            </button>
+            <button id='new-sort' class='button'>New Sort</button>
         </div>
     </main>
 </body>
