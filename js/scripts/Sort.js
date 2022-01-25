@@ -81,9 +81,11 @@ export class ShellSort extends Sort {
 class MergeSort extends Sort {
 	//Merge
 	sort(array) {
-		if (array.length <= 1)
+		let length = array.length;
+		if (length <= 1)
 			return;
-		this.sort(array, 0, array.length - 1)
+		this.sort(array, 0, length - 1)
+		this.auxiliary = new Array(length);
 	}
 	sort(array, left, right) {
 		if (left >= right) {
@@ -95,34 +97,17 @@ class MergeSort extends Sort {
 		this.merge(array, left, middle, right);
 	}
 	merge(array, left, middle, right) {
-		let sizeLeftArray = middle - left + 1;
-		let sizeRightArray = right - middle;
+		 let firstIndex = left, secondIndex = middle + 1;
+		 for(let i = left; i <= right; i++){
+			 this.auxiliary[i] = array[i];
+		 }
 
-		let leftArray = new Array(sizeLeftArray);
-		let rightArray = new Array(sizeRightArray);
+		 for(let i = left; i <= right; i++){
+			 if(firstIndex > middle) array[i] = this.auxiliary[secondIndex++];
+			 else if (secondIndex > right) array[i] = this.auxiliary[firstIndex++];
+			 else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) array[i] = this.auxiliary[firstIndex++];
+			 else array[i] = this.auxiliary[secondIndex++];
+		 }
 
-		for (let i = 0; i < leftArray.length; i++) {
-			leftArray[i] = array[left + i];
-		}
-		for (let i = 0; i < rightArray.length; i++) {
-			rightArray[i] = array[middle + 1 + i];
-		}
-
-		let leftIndex = 0;
-		let rightIndex = 0;
-		let mergedIndex = left;
-		while (leftIndex < sizeLeftArray && rightIndex < sizeRightArray) {
-			if (leftArray[leftIndex] <= rightArray[rightIndex]) {
-				array[mergedIndex++] = leftArray[leftIndex++];
-			} else {
-				array[mergedIndex++] = rightArray[rightIndex++];
-			}
-		}
-		while (leftIndex < sizeLeftArray) {
-			array[mergedIndex++] = leftArray[leftIndex++];
-		}
-		while (rightIndex < sizeRightArray) {
-			array[mergedIndex++] = rightArray[rightIndex++];
-		}
 	}
 }
