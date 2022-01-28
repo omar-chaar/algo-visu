@@ -147,6 +147,7 @@ function createRandomArray(size) {
 }
 
 export function manipulateElements(i, j) {
+    console.log(i, j)
     //Seleciona barras e valores
     const firstBar = document.querySelector(`#bar-${i}`)
     const secondBar = document.querySelector(`#bar-${j}`)
@@ -186,25 +187,21 @@ function setOpacity(val){
 
 //Essa função auto-invocada será executada quando a página iniciar
 (function () {
-    changePage(0) //Por padrão o selection sort será exibido na tela
-    const addEvents = (val) => {
-        for (let i = 0; i <= 3; i++) {
-            const link = document.querySelector(`#link-${i + 1}`)
-            const mobLink = document.querySelector(`#mob-link-${i + 1}`)
-            if (i !== val) {
-                link.addEventListener('click', ({ target }) => {
-                    addEvents(i)
-                    changePage(i)
-                }, { once: true })
-
-                mobLink.addEventListener('click', ({ target }) => {
-                    addEvents(i)
-                    changePage(i)
-                }, { once: true })
-            }
-            //Esse for cria eventos para alterar os algortimos selecionando os elementos na página de acordo com o ID deles
-        }
+    const sort = new URLSearchParams(window.location.search).get('sort')
+    switch(sort){
+        case 'selection':
+            changePage(0)
+            break
+        case 'insertion':
+            changePage(1)
+            break
+        case 'shell':
+            changePage(2)
+            break
+        case 'merge':
+            changePage(3)
+            break
+        default:
+            changePage(0)
     }
-
-    addEvents()
 })()

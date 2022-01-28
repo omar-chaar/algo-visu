@@ -16,6 +16,18 @@ class Sort {
 		manipulateElements(i, j)
 	}
 
+	asyncExch(array, i, j) {
+		return new Promise(resolve => {
+			setTimeout(() => {
+				let swap = array[i];
+				array[i] = array[j];
+				array[j] = swap;
+				manipulateElements(i, j)
+				resolve()
+			}, 1500)
+		})
+	}
+
 	less(firstValue, secondValue) {
 		return firstValue - secondValue < 0;
 	}
@@ -52,14 +64,14 @@ export class InsertionSort extends Sort {
 		for (let i = 1; i < array.length; i++) {
 			setTimeout(() => {
 				for (let j = i; j > 0 && this.less(array[j], array[j - 1]); j--)
-				this.exch(array, j, j - 1);
+					this.exch(array, j, j - 1);
 			}, i * 1500)
 		}
 	}
 }
 
 export class ShellSort extends Sort {
-	sort(array) {
+	async sort(array) {
 		let size = array.length;
 		let gap = 1;
 		while (gap < size) {
@@ -72,9 +84,9 @@ export class ShellSort extends Sort {
 					j >= gap && this.less(array[j], array[j - gap]);
 					j -= gap
 				)
-					this.exch(array, j, j - gap);
+					await this.asyncExch(array, j, j - gap);
 			}
-			gap = parseInt(gap/3);
+			gap = parseInt(gap / 3);
 		}
 	}
 }
@@ -99,17 +111,17 @@ export class MergeSort extends Sort {
 		this.merge(array, left, middle, right);
 	}
 	merge(array, left, middle, right) {
-		 let firstIndex = left, secondIndex = middle + 1;
-		 for(let i = left; i <= right; i++){
-			 this.auxiliary[i] = array[i];
-		 }
+		let firstIndex = left, secondIndex = middle + 1;
+		for (let i = left; i <= right; i++) {
+			this.auxiliary[i] = array[i];
+		}
 
-		 for(let i = left; i <= right; i++){
-			 if(firstIndex > middle) array[i] = this.auxiliary[secondIndex++];
-			 else if (secondIndex > right) array[i] = this.auxiliary[firstIndex++];
-			 else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) array[i] = this.auxiliary[firstIndex++];
-			 else array[i] = this.auxiliary[secondIndex++];
-		 }
+		for (let i = left; i <= right; i++) {
+			if (firstIndex > middle) array[i] = this.auxiliary[secondIndex++];
+			else if (secondIndex > right) array[i] = this.auxiliary[firstIndex++];
+			else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) array[i] = this.auxiliary[firstIndex++];
+			else array[i] = this.auxiliary[secondIndex++];
+		}
 
 	}
 }
