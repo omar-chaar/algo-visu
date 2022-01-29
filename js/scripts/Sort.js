@@ -1,4 +1,4 @@
-import { manipulateElements } from '../script.js'
+import { manipulateElements, manipulateMerge } from '../script.js'
 
 class Sort {
 	constructor(size) {
@@ -96,29 +96,43 @@ export class MergeSort extends Sort {
 	//Merge
 	sort(array) {
 		this.auxiliary = new Array(array.length);
-		this.mergeSort(array, 0, array.length - 1);		
+		this.mergeSort(array, 0, array.length - 1);
 	}
 	mergeSort(array, left, right) {
-	    if(left>=right){
+		if (left >= right) {
 			return;
 		}
-		let middle = left + parseInt((right - left)/2);
-		this.mergeSort(array,left,middle);
-		this.mergeSort(array,middle+1,right);
-		this.merge(array,left,middle,right);
+		let middle = left + parseInt((right - left) / 2);
+		this.mergeSort(array, left, middle);
+		this.mergeSort(array, middle + 1, right);
+		this.merge(array, left, middle, right);
 	}
-	merge(array, left, middle, right) {
-		 let firstIndex = left, secondIndex = middle + 1;
-		 for(let i = left; i <= right; i++){
-			 this.auxiliary[i] = array[i];
-		 }
+	async merge(array, left, middle, right) {
+		let firstIndex = left, secondIndex = middle + 1;
+		for (let i = left; i <= right; i++) {
+			this.auxiliary[i] = array[i];
+			await manipulateMerge(i, i, true)
+		}
 
-		 for(let i = left; i <= right; i++){
-			 if(firstIndex > middle) array[i] = this.auxiliary[secondIndex++];
-			 else if (secondIndex > right) array[i] = this.auxiliary[firstIndex++];
-			 else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) array[i] = this.auxiliary[firstIndex++];
-			 else array[i] = this.auxiliary[secondIndex++];
-		 }
+
+		for (let i = left; i <= right; i++) {
+			if (firstIndex > middle) {
+				await manipulateMerge(i, secondIndex + 1)
+				array[i] = this.auxiliary[secondIndex++];
+			}
+			else if (secondIndex > right) {
+				await manipulateMerge(i, firstIndex + 1)
+				array[i] = this.auxiliary[firstIndex++];
+			}
+			else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) {
+				await manipulateMerge(i, firstIndex + 1)
+				array[i] = this.auxiliary[firstIndex++];
+			}
+			else {
+				await manipulateMerge(i, secondIndex + 1)
+				array[i] = this.auxiliary[secondIndex++];
+			}
+		}
 
 	}
 }

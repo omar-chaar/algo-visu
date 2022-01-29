@@ -21,7 +21,6 @@ const sortingFunctions = {
     },
     3: function mergeSort(array) {
         const sort = new MergeSort(array.length)
-
         sort.sort(array)
     }
 }
@@ -87,6 +86,27 @@ function createArrays() {
         graph.appendChild(barContainer) //Adicionando elementos dentro da div dos gráficos
     })
 
+    const newGraph = document.querySelector('#newGraph')
+    if (newGraph) {
+        newGraph.classList.add('graph')
+        displayArray.forEach((unused, index) => {
+            const bar = document.createElement('div')
+            const value = document.createElement('p')
+
+            bar.classList.add('bar')
+            bar.id = `newBar-${index}`
+            value.classList.add('bar-value')
+            value.id = `newValue-${index}`
+
+            const newBarContainer = document.createElement('div')
+            newBarContainer.classList.add('bar-container')
+            newBarContainer.appendChild(value)
+            newBarContainer.appendChild(bar)
+
+            newGraph.appendChild(newBarContainer)
+        })
+    }
+
     return displayArray
 }
 
@@ -127,7 +147,7 @@ function toggleButtons(state, disablePlay = false) {
     const play = document.querySelector('#play')
     const newSort = document.querySelector('#new-sort')
 
-    if(!disablePlay) play.disabled = state //Habilita o play apenas quando o algoritmo estiver não ordenado
+    if (!disablePlay) play.disabled = state //Habilita o play apenas quando o algoritmo estiver não ordenado
     newSort.disabled = state
     //Habilita / desabilita os botões de acordo com o parâmetro
 }
@@ -147,7 +167,6 @@ function createRandomArray(size) {
 }
 
 export function manipulateElements(i, j) {
-    console.log(i, j)
     //Seleciona barras e valores
     const firstBar = document.querySelector(`#bar-${i}`)
     const secondBar = document.querySelector(`#bar-${j}`)
@@ -178,7 +197,41 @@ export function manipulateElements(i, j) {
     }, 1000)
 }
 
-function setOpacity(val){
+//not working
+export function manipulateMerge(i, j, toAuxiliar) {
+    return new Promise((resolve) => {
+        const firstBar = document.querySelector(`#bar-${i}`)
+        const secondBar = document.querySelector(`#newBar-${j}`)
+        const firstValue = document.querySelector(`#value-${i}`)
+        const secondValue = document.querySelector(`#newValue-${j}`)
+        if (toAuxiliar) {
+            firstBar.style.backgroundColor = 'red'
+            setTimeout(() => {
+                firstBar.style.visibility = 'hidden'
+                firstValue.style.visibility = 'hidden'
+                firstBar.style.backgroundColor = '#333'
+                secondBar.style.height = `${parseInt(firstBar.style.height)}px`
+                secondValue.innerHTML = firstValue.innerHTML
+                resolve()
+            }, 1500)
+        } else {
+            secondBar.style.backgroundColor = 'red'
+            setTimeout(() => {
+                secondBar.style.visibility = 'hidden'
+                secondValue.style.visibility = 'hidden'
+                secondBar.style.backgroundColor = '#333'
+                firstBar.style.height = `${parseInt(secondBar.style.height)}px`
+                firstValue.innerHTML = secondValue.innerHTML
+                firstBar.style.visibility = 'visible'
+                firstValue.style.visibility = 'visible'
+                resolve()
+            }, 1500)
+        }
+    })
+}
+//
+
+function setOpacity(val) {
     for (let i = 0; i <= 3; i++) {
         document.querySelector(`#link-${i + 1}`).style.opacity = val === i ? 0.5 : 1
         document.querySelector(`#mob-link-${i + 1}`).style.opacity = val === i ? 0.5 : 1
@@ -188,7 +241,7 @@ function setOpacity(val){
 //Essa função auto-invocada será executada quando a página iniciar
 (function () {
     const sort = new URLSearchParams(window.location.search).get('sort')
-    switch(sort){
+    switch (sort) {
         case 'selection':
             changePage(0)
             break
@@ -199,6 +252,14 @@ function setOpacity(val){
             changePage(2)
             break
         case 'merge':
+            document.querySelector('#title').style.transform = 'translateY(-100%)'
+            document.querySelector('.button-container').style.transform = 'translateY(-700%)'
+            const graph = document.querySelector('#graph')
+            graph.style.transform = 'scale(0.5) translateY(-75%)'
+            const newGraph = graph.cloneNode()
+            newGraph.style.transform = 'scale(0.5) translateY(-150%)'
+            newGraph.id = 'newGraph'
+            graph.after(newGraph)
             changePage(3)
             break
         default:

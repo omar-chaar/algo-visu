@@ -8,6 +8,7 @@ html, body{
     margin: 0;
     padding: 0;
     background-color: #f8f9fa;
+    min-height: 100vh;
 }
 
 header{
@@ -88,7 +89,7 @@ main{
     padding-top: 85px;
 }
 
-#graph{
+.graph{
     width: 1000px;
     height: 344px;
     display: flex;
@@ -117,7 +118,7 @@ main{
 }
 
 .button-container{
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 .button{
@@ -139,7 +140,7 @@ main{
 }
 
 @media(max-width: 1220px){
-    #graph{
+    .graph{
         width: 800px;
     }
 }
@@ -169,19 +170,19 @@ main{
     .logo{
         font-size: 1.2rem;
     }
-    #graph{
+    .graph{
         width: 600px;
     }
 }
 
 @media(max-width: 600px){
-    #graph{
+    .graph{
         width: 400px;
     }
 }
 
 @media(max-width: 400px){
-    #graph{
+    .graph{
         width: 300px;
     }
     .bar-value{
@@ -193,7 +194,7 @@ main{
 }
 
 @media(max-width: 300px){
-    #graph{
+    .graph{
         width: 250px;
     }
     .bar-value{
