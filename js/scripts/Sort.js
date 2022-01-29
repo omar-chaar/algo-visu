@@ -96,6 +96,9 @@ export class MergeSort extends Sort {
 	//Merge
 	sort(array) {
 		this.auxiliary = new Array(array.length);
+		for(let i = 0; i < array.length; i++){
+			this.auxiliary[i] = array[i];
+		}
 		this.mergeSort(array, 0, array.length - 1);
 	}
 	mergeSort(array, left, right) {
@@ -107,30 +110,30 @@ export class MergeSort extends Sort {
 		this.mergeSort(array, middle + 1, right);
 		this.merge(array, left, middle, right);
 	}
-	async merge(array, left, middle, right) {
+	merge(array, left, middle, right) {
 		let firstIndex = left, secondIndex = middle + 1;
 		for (let i = left; i <= right; i++) {
 			this.auxiliary[i] = array[i];
-			await manipulateMerge(i, i, true)
+			manipulateMerge(i, i, true)
 		}
-
 
 		for (let i = left; i <= right; i++) {
 			if (firstIndex > middle) {
-				await manipulateMerge(i, secondIndex + 1)
+				manipulateMerge(i, secondIndex)
 				array[i] = this.auxiliary[secondIndex++];
 			}
 			else if (secondIndex > right) {
-				await manipulateMerge(i, firstIndex + 1)
+				manipulateMerge(i, firstIndex)
 				array[i] = this.auxiliary[firstIndex++];
 			}
 			else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) {
-				await manipulateMerge(i, firstIndex + 1)
+				manipulateMerge(i, firstIndex)
 				array[i] = this.auxiliary[firstIndex++];
 			}
 			else {
-				await manipulateMerge(i, secondIndex + 1)
+				manipulateMerge(i, secondIndex)
 				array[i] = this.auxiliary[secondIndex++];
+				
 			}
 		}
 

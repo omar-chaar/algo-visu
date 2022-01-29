@@ -195,37 +195,31 @@ export function manipulateElements(i, j) {
     }, 1000)
 }
 
-//not working
+//Working only synchronous
 export function manipulateMerge(i, j, toAuxiliar) {
-    return new Promise((resolve) => {
-        const firstBar = document.querySelector(`#bar-${i}`)
-        const secondBar = document.querySelector(`#newBar-${j}`)
-        const firstValue = document.querySelector(`#value-${i}`)
-        const secondValue = document.querySelector(`#newValue-${j}`)
-        if (toAuxiliar) {
-            firstBar.style.backgroundColor = 'red'
-            setTimeout(() => {
-                firstBar.style.visibility = 'hidden'
-                firstValue.style.visibility = 'hidden'
-                firstBar.style.backgroundColor = '#333'
-                secondBar.style.height = `${parseInt(firstBar.style.height)}px`
-                secondValue.innerHTML = firstValue.innerHTML
-                resolve()
-            }, 1500)
-        } else {
-            secondBar.style.backgroundColor = 'red'
-            setTimeout(() => {
-                secondBar.style.visibility = 'hidden'
-                secondValue.style.visibility = 'hidden'
-                secondBar.style.backgroundColor = '#333'
-                firstBar.style.height = `${parseInt(secondBar.style.height)}px`
-                firstValue.innerHTML = secondValue.innerHTML
-                firstBar.style.visibility = 'visible'
-                firstValue.style.visibility = 'visible'
-                resolve()
-            }, 1500)
-        }
-    })
+	const firstBar = document.querySelector(`#bar-${i}`);
+	const secondBar = document.querySelector(`#newBar-${j}`);
+	const firstValue = document.querySelector(`#value-${i}`);
+	const secondValue = document.querySelector(`#newValue-${j}`);
+	if (toAuxiliar) {
+		firstBar.style.backgroundColor = "red";
+
+		firstBar.style.visibility = "hidden";
+		firstValue.style.visibility = "hidden";
+		firstBar.style.backgroundColor = "#333";
+		secondBar.style.height = `${parseInt(firstBar.style.height)}px`;
+		secondValue.innerHTML = firstValue.innerHTML;
+	} else {
+		secondBar.style.backgroundColor = "red";
+
+		secondBar.style.visibility = "hidden";
+		secondValue.style.visibility = "hidden";
+		secondBar.style.backgroundColor = "#333";
+		firstBar.style.height = `${parseInt(secondBar.style.height)}px`;
+		firstValue.innerHTML = secondValue.innerHTML;
+		firstBar.style.visibility = "visible";
+		firstValue.style.visibility = "visible";
+	}
 }
 //
 
