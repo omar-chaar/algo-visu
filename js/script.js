@@ -6,21 +6,19 @@ let eventCallback //Essa variável salva a função que dispara o evento para qu
 //Objeto com funções que invocam os algortimos, listados por numeros
 const sortingFunctions = {
     0: function selectionSort(array) {
-        const sort = new SelectionSort(array.length)
+        const sort = new SelectionSort()
         sort.sort(array)
     },
     1: function insertionSort(array) {
-        const sort = new InsertionSort(array.length)
-
+        const sort = new InsertionSort()
         sort.sort(array)
     },
     2: function shellSort(array) {
-        const sort = new ShellSort(array.length)
-
+        const sort = new ShellSort()
         sort.sort(array)
     },
     3: function mergeSort(array) {
-        const sort = new MergeSort(array.length)
+        const sort = new MergeSort()
         sort.sort(array)
     }
 }
