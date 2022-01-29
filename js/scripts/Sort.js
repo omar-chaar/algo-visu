@@ -96,46 +96,75 @@ export class MergeSort extends Sort {
 	//Merge
 	sort(array) {
 		this.auxiliary = new Array(array.length);
-		for(let i = 0; i < array.length; i++){
+		for (let i = 0; i < array.length; i++) {
 			this.auxiliary[i] = array[i];
 		}
 		this.mergeSort(array, 0, array.length - 1);
 	}
-	mergeSort(array, left, right) {
+	async mergeSort(array, left, right) {
 		if (left >= right) {
 			return;
 		}
 		let middle = left + parseInt((right - left) / 2);
-		this.mergeSort(array, left, middle);
-		this.mergeSort(array, middle + 1, right);
-		this.merge(array, left, middle, right);
+		await this.mergeSort(array, left, middle);
+		await this.mergeSort(array, middle + 1, right);
+		await this.merge(array, left, middle, right);
 	}
 	merge(array, left, middle, right) {
-		let firstIndex = left, secondIndex = middle + 1;
-		for (let i = left; i <= right; i++) {
-			this.auxiliary[i] = array[i];
-			manipulateMerge(i, i, true)
-		}
+		return new Promise((resolve) => {
+			let firstIndex = left, secondIndex = middle + 1;
+			for (let i = left; i <= right; i++) {
+				this.auxiliary[i] = array[i];
+				manipulateMerge(i, i, true)
+			}
 
-		for (let i = left; i <= right; i++) {
-			if (firstIndex > middle) {
-				manipulateMerge(i, secondIndex)
-				array[i] = this.auxiliary[secondIndex++];
-			}
-			else if (secondIndex > right) {
-				manipulateMerge(i, firstIndex)
-				array[i] = this.auxiliary[firstIndex++];
-			}
-			else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) {
-				manipulateMerge(i, firstIndex)
-				array[i] = this.auxiliary[firstIndex++];
-			}
-			else {
-				manipulateMerge(i, secondIndex)
-				array[i] = this.auxiliary[secondIndex++];
-				
-			}
-		}
+			let i = left
 
+			const interval = setInterval(() => {
+				if (firstIndex > middle) {
+					manipulateMerge(i, secondIndex)
+					array[i] = this.auxiliary[secondIndex++];
+				}
+				else if (secondIndex > right) {
+					manipulateMerge(i, firstIndex)
+					array[i] = this.auxiliary[firstIndex++];
+				}
+				else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) {
+					manipulateMerge(i, firstIndex)
+					array[i] = this.auxiliary[firstIndex++];
+				}
+				else {
+					manipulateMerge(i, secondIndex)
+					array[i] = this.auxiliary[secondIndex++];
+
+				}
+				i += 1
+				if (i > right) {
+					clearInterval(interval)
+					resolve()
+				}
+			}, 1500)
+			
+			/* for (let i = left; i <= right; i++) {
+				if (firstIndex > middle) {
+					manipulateMerge(i, secondIndex)
+					array[i] = this.auxiliary[secondIndex++];
+				}
+				else if (secondIndex > right) {
+					manipulateMerge(i, firstIndex)
+					array[i] = this.auxiliary[firstIndex++];
+				}
+				else if (this.less(this.auxiliary[firstIndex], this.auxiliary[secondIndex])) {
+					manipulateMerge(i, firstIndex)
+					array[i] = this.auxiliary[firstIndex++];
+				}
+				else {
+					manipulateMerge(i, secondIndex)
+					array[i] = this.auxiliary[secondIndex++];
+
+				}
+			} */
+
+		})
 	}
 }

@@ -244,12 +244,9 @@ function setOpacity(val) {
             changePage(2)
             break
         case 'merge':
-            document.querySelector('#title').style.transform = 'translateY(-100%)'
-            document.querySelector('.button-container').style.transform = 'translateY(-700%)'
             const graph = document.querySelector('#graph')
-            graph.style.transform = 'scale(0.5) translateY(-75%)'
             const newGraph = graph.cloneNode()
-            newGraph.style.transform = 'scale(0.5) translateY(-150%)'
+            newGraph.style.display = 'none'
             newGraph.id = 'newGraph'
             graph.after(newGraph)
             changePage(3)
