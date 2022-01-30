@@ -13,13 +13,15 @@ const sortingFunctions = {
         const sort = new InsertionSort()
         sort.sort(array)
     },
-    2: function shellSort(array) {
+    2: async function shellSort(array) {
         const sort = new ShellSort()
-        sort.sort(array)
+        await sort.sort(array)
+        return
     },
-    3: function mergeSort(array) {
+    3: async function mergeSort(array) {
         const sort = new MergeSort()
-        sort.sort(array)
+        await sort.sort(array)
+        return
     }
 }
 
@@ -113,20 +115,31 @@ function emptyGraph() {
 }
 
 function createPlayEvent(page, array) {
+    console.log(page)
     const play = document.querySelector('#play') //Seleciona botão play
     play.removeEventListener('click', eventCallback) //Caso haja um evento anterior, ele remove esse evento para criar um novo evento com o novo array
     eventCallback = () => { //Atribui a função callback a variável eventCallBack
         toggleButtons(true) //Desabilita os botões
-        const myPromise = new Promise((resolve, reject) => {
-            sortingFunctions[page](array) //Selecionamos a função através do index que corresponde a ela (page) e passamos o array como parametro
-            setTimeout(() => {
+        if (page < 2) {
+            const timePromise = new Promise((resolve) => {
+                sortingFunctions[page](array) //Selecionamos a função através do index que corresponde a ela (page) e passamos o array como parametro
+                setTimeout(() => {
+                    resolve()
+                }, 15000)
+            }) //Aqui foi usado uma promise para esperar 15s até que o array seja reorganizado
+            timePromise.then(() => {
+                toggleButtons(false, true) //Quando a promise retorna resolvida, significa que se passaram 15 minutos e os botões são re-ativados
+            })
+        }
+        else {
+            const asyncPromise = new Promise(async (resolve) => {
+                await sortingFunctions[page](array)
                 resolve()
-            }, 15000)
-        }) //Aqui foi usado uma promise para esperar 15s até que o array seja reorganizado
-
-        myPromise.then(() => {
-            toggleButtons(false, true) //Quando a promise retorna resolvida, significa que se passaram 15 minutos e os botões são re-ativados
-        })
+            })
+            asyncPromise.then(() => {
+                toggleButtons(false, true)
+            })
+        }
     }
     play.addEventListener('click', eventCallback) //Adiciona a função callback ao evento de click no botão
 }
@@ -197,29 +210,22 @@ export function manipulateElements(i, j) {
 
 //Working only synchronous
 export function manipulateMerge(i, j, toAuxiliar) {
-	const firstBar = document.querySelector(`#bar-${i}`);
-	const secondBar = document.querySelector(`#newBar-${j}`);
-	const firstValue = document.querySelector(`#value-${i}`);
-	const secondValue = document.querySelector(`#newValue-${j}`);
-	if (toAuxiliar) {
-		firstBar.style.backgroundColor = "red";
-
-		firstBar.style.visibility = "hidden";
-		firstValue.style.visibility = "hidden";
-		firstBar.style.backgroundColor = "#333";
-		secondBar.style.height = `${parseInt(firstBar.style.height)}px`;
-		secondValue.innerHTML = firstValue.innerHTML;
-	} else {
-		secondBar.style.backgroundColor = "red";
-
-		secondBar.style.visibility = "hidden";
-		secondValue.style.visibility = "hidden";
-		secondBar.style.backgroundColor = "#333";
-		firstBar.style.height = `${parseInt(secondBar.style.height)}px`;
-		firstValue.innerHTML = secondValue.innerHTML;
-		firstBar.style.visibility = "visible";
-		firstValue.style.visibility = "visible";
-	}
+    const firstBar = document.querySelector(`#bar-${i}`);
+    const secondBar = document.querySelector(`#newBar-${j}`);
+    const firstValue = document.querySelector(`#value-${i}`);
+    const secondValue = document.querySelector(`#newValue-${j}`);
+    if (toAuxiliar) {
+        firstBar.style.backgroundColor = "red";
+        firstBar.style.backgroundColor = "red";
+        firstValue.style.color = "red";
+        secondBar.style.height = `${parseInt(firstBar.style.height)}px`;
+        secondValue.innerHTML = firstValue.innerHTML;
+    } else {
+        firstBar.style.height = `${parseInt(secondBar.style.height)}px`;
+        firstValue.innerHTML = secondValue.innerHTML;
+        firstBar.style.backgroundColor = "#333";
+        firstValue.style.color = "#333";
+    }
 }
 //
 

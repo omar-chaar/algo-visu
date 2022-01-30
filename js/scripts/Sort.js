@@ -88,18 +88,21 @@ export class ShellSort extends Sort {
 			}
 			gap = parseInt(gap / 3);
 		}
+
+        return
 	}
 }
 
 
 export class MergeSort extends Sort {
 	//Merge
-	sort(array) {
+	async sort(array) {
 		this.auxiliary = new Array(array.length);
 		for (let i = 0; i < array.length; i++) {
 			this.auxiliary[i] = array[i];
 		}
-		this.mergeSort(array, 0, array.length - 1);
+		await this.mergeSort(array, 0, array.length - 1);
+		return
 	}
 	async mergeSort(array, left, right) {
 		if (left >= right) {
