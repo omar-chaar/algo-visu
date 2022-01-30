@@ -1,5 +1,5 @@
 import sideMenu from "./template/menu.js";
-import { toggleButtons, createPlayEvent, createNewSortEvent } from './methods/events.js'
+import { toggleButtons, createPlayEvent, createNewSortEvent} from './methods/events.js'
 import {createArrays} from './methods/arrays.js'
 //Toda vez que o usuário selecionar outro algoritmo essa função será invocada com um valor que corresponde ao algortimo
 function changePage(page) { //"page" é o valor correspondente ao algoritimo, de 0 à 3, ele será usado para selecionar as funções acima
@@ -49,11 +49,6 @@ function setOpacity(val) {
             changePage(2)
             break
         case 'merge':
-            const graph = document.querySelector('#graph')
-            const newGraph = graph.cloneNode()
-            newGraph.style.display = 'none'
-            newGraph.id = 'newGraph'
-            graph.after(newGraph)
             changePage(3)
             break
         default:

@@ -1,3 +1,5 @@
+const auxiliar = []
+
 export function manipulateElements(i, j) {
     //Seleciona barras e valores
     const firstBar = document.querySelector(`#bar-${i}`)
@@ -32,18 +34,14 @@ export function manipulateElements(i, j) {
 //Working only synchronous
 export function manipulateMerge(i, j, toAuxiliar) {
     const firstBar = document.querySelector(`#bar-${i}`);
-    const secondBar = document.querySelector(`#newBar-${j}`);
     const firstValue = document.querySelector(`#value-${i}`);
-    const secondValue = document.querySelector(`#newValue-${j}`);
     if (toAuxiliar) {
         firstBar.style.backgroundColor = "red";
-        firstBar.style.backgroundColor = "red";
         firstValue.style.color = "red";
-        secondBar.style.height = `${parseInt(firstBar.style.height)}px`;
-        secondValue.innerHTML = firstValue.innerHTML;
+        auxiliar[i] = parseInt(firstValue.innerHTML)
     } else {
-        firstBar.style.height = `${parseInt(secondBar.style.height)}px`;
-        firstValue.innerHTML = secondValue.innerHTML;
+        firstBar.style.height = `${auxiliar[j] * 10}px`;
+        firstValue.innerHTML = auxiliar[j];
         firstBar.style.backgroundColor = "#333";
         firstValue.style.color = "#333";
     }

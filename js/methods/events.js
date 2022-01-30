@@ -8,6 +8,7 @@ export function createPlayEvent(page, array) {
     play.removeEventListener('click', eventCallback) //Caso haja um evento anterior, ele remove esse evento para criar um novo evento com o novo array
     eventCallback = () => { //Atribui a função callback a variável eventCallBack
         toggleButtons(true) //Desabilita os botões
+        localStorage.setItem('stop', false)
         if (page < 2) {
             const timePromise = new Promise((resolve) => {
                 sortingFunctions[page](array) //Selecionamos a função através do index que corresponde a ela (page) e passamos o array como parametro

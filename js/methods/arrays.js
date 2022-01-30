@@ -28,27 +28,6 @@ export function createArrays() {
         graph.appendChild(barContainer) //Adicionando elementos dentro da div dos gráficos
     })
 
-    const newGraph = document.querySelector('#newGraph')
-    if (newGraph) {
-        newGraph.classList.add('graph')
-        displayArray.forEach((unused, index) => {
-            const bar = document.createElement('div')
-            const value = document.createElement('p')
-
-            bar.classList.add('bar')
-            bar.id = `newBar-${index}`
-            value.classList.add('bar-value')
-            value.id = `newValue-${index}`
-
-            const newBarContainer = document.createElement('div')
-            newBarContainer.classList.add('bar-container')
-            newBarContainer.appendChild(value)
-            newBarContainer.appendChild(bar)
-
-            newGraph.appendChild(newBarContainer)
-        })
-    }
-
     return displayArray
 }
 
