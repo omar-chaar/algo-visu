@@ -1,4 +1,4 @@
-import { manipulateElements, manipulateMerge } from '../script.js'
+import { manipulateElements, manipulateMerge } from '../methods/manipulation.js'
 
 class Sort {
 	constructor(size) {
