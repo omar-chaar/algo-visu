@@ -41,16 +41,16 @@ window.addEventListener('load', () => {
     sideMenu()
     let page = 0
     switch(location.pathname){
-        case '/selection.html':
+        case '/algo-visu/selection.html':
             page = 0
             break
-        case '/insertion.html':
+        case '/algo-visu/insertion.html':
             page = 1
             break
-        case '/shell.html':
+        case '/algo-visu/shell.html':
             page = 2
             break
-        case '/merge.html':
+        case '/algo-visu/merge.html':
             page = 3
             break
         default: 
