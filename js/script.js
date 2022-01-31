@@ -6,19 +6,19 @@ function animHome(){
     const pages = [
         {
             title: 'Selection Sort',
-            url: '/selection.html'
+            url: 'selection.html'
         },
         {
             title: 'Insertion Sort',
-            url: '/insertion.html'
+            url: 'insertion.html'
         },
         {
             title: 'Shell Sort',
-            url: '/shell.html'
+            url: 'shell.html'
         },
         {
             title: 'Merge Sort',
-            url: '/merge.html'
+            url: 'merge.html'
         }
     ]
     const home = document.querySelector('#home')
