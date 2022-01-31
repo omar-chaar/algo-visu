@@ -139,10 +139,6 @@ main{
     cursor: default;
 }
 
-.fadeDown{
-    animation: fadeDown 1s forwards;
-}
-
 .fadeRight{
     animation: fadeRight 1s forwards;
 }
@@ -183,16 +179,6 @@ main{
 
 .sortOption:hover h1{
     transform: scale(1.1)
-}
-
-@keyframes fadeDown {
-    from{
-        transform: translateY(-100%);
-        opacity: 0;
-    }to{
-        transform: initial;
-        opacity: 1;
-    }
 }
 
 @keyframes fadeRight {
