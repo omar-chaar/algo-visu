@@ -172,10 +172,10 @@ export class MergeSort extends Sort {
 	}
 }
 export class BubbleSort extends Sort{
-	sort(array){
+	async sort(array){
 		for(let i = 0; i < array.length-1; i++)
 			for(let j = 0; j < array.length - i - 1; j++)
 				if(this.less(array[j+1],array[j]))
-					this.exch(array,j+1,j)
+					await this.asyncExch(array,j+1,j)		
 	}
 }
