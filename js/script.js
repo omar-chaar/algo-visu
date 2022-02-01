@@ -4,6 +4,10 @@ import {createArrays} from './methods/arrays.js'
 
 const pages = [
     {
+        title: 'Bubble Sort',
+        url: 'bubble.html'
+    },
+    {
         title: 'Selection Sort',
         url: 'selection.html'
     },

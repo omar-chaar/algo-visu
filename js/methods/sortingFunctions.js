@@ -1,4 +1,4 @@
-import { SelectionSort, InsertionSort, ShellSort, MergeSort } from '../scripts/Sort.js'
+import { SelectionSort, InsertionSort, ShellSort, MergeSort, BubbleSort } from '../scripts/Sort.js'
 
 const sortingFunctions = {
     0: function selectionSort(array) {
@@ -18,6 +18,10 @@ const sortingFunctions = {
         const sort = new MergeSort()
         await sort.sort(array)
         return
+    },
+    4: function bubbleSort(array) {
+        const sort = new BubbleSort()
+        sort.sort(array)
     }
 }
 
