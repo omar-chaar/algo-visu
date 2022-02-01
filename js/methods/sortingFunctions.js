@@ -19,9 +19,10 @@ const sortingFunctions = {
         await sort.sort(array)
         return
     },
-    4: function bubbleSort(array) {
+    4: async function bubbleSort(array) {
         const sort = new BubbleSort()
-        sort.sort(array)
+        await sort.sort(array)
+        return
     }
 }
 
