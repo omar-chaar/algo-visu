@@ -106,6 +106,8 @@ window.addEventListener('load', () => {
         page = 2
     }else if(path === '/algo-visu/merge.html' || path === '/merge.html'){
         page = 3
+    }else if(path === '/algo-visu/bubble.html' || path === '/bubble.html'){
+        page = 4
     }else{
         return animHome()
     }
