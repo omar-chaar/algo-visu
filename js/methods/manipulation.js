@@ -9,8 +9,8 @@ export function manipulateElements(i, j) {
     const secondValue = document.querySelector(`#value-${j}`)
 
     //Altera o valor de ambos as barras para se destacar
-    firstBar.style.backgroundColor = 'red'
-    secondBar.style.backgroundColor = 'blue'
+    firstBar.style.backgroundColor = '#AC1919'
+    secondBar.style.backgroundColor = '#003399'
 
     setTimeout(() => {
         //Após 1 segundo, o valor de ambos os elementos são coletados
@@ -26,8 +26,8 @@ export function manipulateElements(i, j) {
         secondBar.style.height = `${value1 * 10}px`
 
         //Cores são setadas de volta ao normal
-        firstBar.style.backgroundColor = '#333'
-        secondBar.style.backgroundColor = '#333'
+        firstBar.style.backgroundColor = '#D6D7D8'
+        secondBar.style.backgroundColor = '#D6D7D8'
     }, 1000)
 }
 
@@ -36,13 +36,13 @@ export function manipulateMerge(i, j, toAuxiliar) {
     const firstBar = document.querySelector(`#bar-${i}`);
     const firstValue = document.querySelector(`#value-${i}`);
     if (toAuxiliar) {
-        firstBar.style.backgroundColor = "red";
-        firstValue.style.color = "red";
+        firstBar.style.backgroundColor = "#AC1919";
+        firstValue.style.color = "#AC1919";
         auxiliar[i] = parseInt(firstValue.innerHTML)
     } else {
         firstBar.style.height = `${auxiliar[j] * 10}px`;
         firstValue.innerHTML = auxiliar[j];
-        firstBar.style.backgroundColor = "#333";
-        firstValue.style.color = "#333";
+        firstBar.style.backgroundColor = "#D6D7D8";
+        firstValue.style.color = "#D6D7D8";
     }
 }

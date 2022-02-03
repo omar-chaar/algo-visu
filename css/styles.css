@@ -7,19 +7,19 @@
 html, body{
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+    background-color: #343a40;
     min-height: 100%;
 }
 
 header{
     height: 60px;
     max-width: 100vw;
-    background-color: #f8f9fa;
     box-shadow: 0px 1px 17px -5px rgba(0,0,0,0.78);
     -webkit-box-shadow: 0px 1px 17px -5px rgba(0,0,0,0.78);
     -moz-box-shadow: 0px 1px 17px -5px rgba(0,0,0,0.78);
     z-index: 10;
     margin-bottom: 17px;
+    background-color: #1F2226;
 }
 
 #desktop-nav{
@@ -42,7 +42,7 @@ header{
     display: none;
     flex-direction: column;
     align-items: center;
-    background-color: #f8f9fa;
+    background-color: #1F2226;
     padding: 10px;
     animation: moveIn .75s forwards;
 }
@@ -54,18 +54,23 @@ a{
 .logo{
     font-size: 1.5rem;
     margin: 0;
-    color: #333;
+    color: #fff;
     transition: opacity .5s;
 }
 
+#title{
+    color: #D6D7D8;
+}
+
 .nav-item{
-    color: #333;
+    color: #fff;
     margin: 0 15px;
     cursor: pointer;
+    transition: opacity .5s;
 }
 
 .nav-item:hover{
-    opacity: .7;
+    opacity: .6;
 }
 
 #hamburger{
@@ -80,7 +85,7 @@ a{
 }
 
 main{
-    background-color: #f8f9fa;
+    background-color: #343a40;
     height: calc(100vh - 77px);
     max-width: 100vw;
     display: flex;
@@ -108,12 +113,12 @@ main{
 
 .bar-value{
     margin: 5px 0;
-    color: #333;
+    color: #D6D7D8;
     font-weight: bolder;
     font-size: 1.2rem;
 }
 .bar{
-    background-color: #333;
+    background-color: #D6D7D8;
     width: 100%;
 }
 
@@ -123,11 +128,12 @@ main{
 
 .button{
     padding: 10px;
-    border: 1px solid #333;
-    border-radius: 5px;
+    border: 1px solid #D6D7D8;
+    border-radius: 10px;
     background: none;
     cursor: pointer;
     margin: 0 5px;
+    color: #fff;
 }
 
 .button:hover{
@@ -135,7 +141,7 @@ main{
 }
 
 .button:disabled{
-    opacity: 0.6;
+    opacity: 0.2;
     cursor: default;
 }
 
@@ -155,7 +161,6 @@ main{
 }
 
 .sortOption{
-    border: 1px solid #333;
     border-radius: 25px;
     margin: 25px;
     padding: 70px 0px;
@@ -163,7 +168,7 @@ main{
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #333;
+    color: #fff;
     transition: all .5s;
     animation: fadeRight .5s forwards;
 }
@@ -173,13 +178,56 @@ main{
     margin: 0;
 }
 
-.sortOption:hover{
-    border: 1px solid rgba(51, 51, 51, 0.2);
-}
 
 .sortOption:hover h1{
     transform: scale(1.1)
 }
+
+.sortOption[href='bubble.html']{
+    border: 2px solid #8F3A84;
+}
+
+.sortOption[href='bubble.html']:hover{
+    border: 2px solid rgba(143,58,132, 0.4);
+    color: #8F3A84;
+}
+
+.sortOption[href='selection.html']{
+    border: 2px solid yellow;
+}
+
+.sortOption[href='selection.html']:hover{
+    border: 2px solid rgba(255, 255, 0, 0.2);
+    color: yellow;
+}
+
+.sortOption[href='insertion.html']{
+    border: 2px solid #3366CC;
+}
+
+.sortOption[href='insertion.html']:hover{
+    border: 2px solid rgba(51, 102, 204, 0.4);
+    color: #3366CC;
+}
+
+.sortOption[href='shell.html']{
+    border: 2px solid #009900;
+}
+
+.sortOption[href='shell.html']:hover{
+    border: 2px solid rgba(0, 102, 0, 0.4);
+    color: #009900;
+}
+
+.sortOption[href='merge.html']{
+    border: 2px solid #FF3333;
+}
+
+.sortOption[href='merge.html']:hover{
+    border: 2px solid rgba(255, 51, 51,0.4);
+    color: #FF3333;
+}
+
 
 @keyframes fadeRight {
     from{
