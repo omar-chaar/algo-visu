@@ -37,7 +37,7 @@ export function manipulateMerge(i, j, toAuxiliar) {
     const firstValue = document.querySelector(`#value-${i}`);
     if (toAuxiliar) {
         firstBar.style.backgroundColor = "#AC1919";
-        firstValue.style.color = "#AC1919";
+        firstValue.style.color = "#dc3545";
         auxiliar[i] = parseInt(firstValue.innerHTML)
     } else {
         firstBar.style.height = `${auxiliar[j] * 10}px`;
