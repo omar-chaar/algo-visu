@@ -12,6 +12,14 @@
 
 Algorithm Visualizer is a tool that allows you to visualize the execution of an algorithm in a browser.
 
+#### Current Supported Sorting Algorithms:
+
+* Bubble Sorting
+* Selection Sorting
+* Insert Sorting
+* Shell Sorting
+* Merge Sorting
+
 ## Usage
 
 * Access the website [here](https://omar-chaar.github.io/algo-visu)
